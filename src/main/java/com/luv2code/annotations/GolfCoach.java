@@ -25,7 +25,11 @@ public class GolfCoach implements Coach{
 
     private FortuneService fS;
     public String getDailyFortune() {
-        return fS.getFortune();
+        if (fS != null){
+            return fS.getFortune();
+        }else{
+            return "No fortune Service";
+        }
     }
 
     public GolfCoach(){

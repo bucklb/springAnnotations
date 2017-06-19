@@ -16,11 +16,11 @@ public class AnnotationApp {
         // 18/6/17 - assume this is where I was looking at mixing XML and AutoWire beans ??
 
         // If the bean is in the context file then it gets initiated, even if it's never used
-        /*
-		Coach theCoach = context.getBean("tennisCoach",Coach.class);
+
+        // via Autowire type stuff
+		Coach theCoach = context.getBean("poloCoach",Coach.class);
         System.out.println(theCoach.getDailyWorkout());
         System.out.println(theCoach.getDailyFortune());
-*/
 
         // Demonstrate getting stuff using the Autowire approach
 //        Coach theCoach = context.getBean("golfCoach",Coach.class);
@@ -36,7 +36,12 @@ public class AnnotationApp {
 //        Coach xmlCoach = context.getBean("tennisCoach",Coach.class);
         Coach xmlCoach = context.getBean(coachType,Coach.class);
         System.out.println(xmlCoach.getDailyWorkout());
+        System.out.println(xmlCoach.getDailyFortune());
 
+        xmlCoach = context.getBean("tennisCoach",Coach.class);
+        System.out.println(((TennisCoach)xmlCoach).getTeam());
+        System.out.println(xmlCoach.getDailyWorkout());
+        System.out.println(xmlCoach.getDailyFortune());
 
         //        System.out.println(theCoach.getDailyFortune());
 

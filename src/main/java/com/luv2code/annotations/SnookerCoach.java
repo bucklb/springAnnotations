@@ -14,6 +14,11 @@ public class SnookerCoach implements Coach{
         System.out.println("Snooker coach - constructor");
     }
 
+    // Allow injection via setter
+    public void setFs(FortuneService fS) {
+        System.out.println("Setting SnookerCoach fS");
+        this.fS = fS;
+    }
 
     /*
     private FortuneService fS;

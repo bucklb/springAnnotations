@@ -9,6 +9,10 @@ package com.luv2code.annotations;
 
 public class HappyFortuneService implements FortuneService{
 
+    public HappyFortuneService(){
+        System.out.println("Constructing HappyFortuneService");
+    }
+
     public String getFortune() {
         return "Happy, happy. Joy, joy\n";
     };
