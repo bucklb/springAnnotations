@@ -5,6 +5,16 @@ package com.luv2code.annotations;
 
 public class SnookerCoach implements Coach{
 
+    private FortuneService fS;
+    public String getDailyFortune() {
+        return fS.getFortune();
+    }
+
+    public SnookerCoach(){
+        System.out.println("Snooker coach - constructor");
+    }
+
+
     /*
     private FortuneService fS;
 
@@ -24,8 +34,6 @@ public class SnookerCoach implements Coach{
     }
 
 */
-    public SnookerCoach(){
-    }
 
 
     public String getDailyWorkout() {

@@ -21,6 +21,16 @@ public class PoloCoach implements Coach{
         System.out.println(">> polo INITed");
     }
 
+    private FortuneService fS;
+    public String getDailyFortune() {
+        return fS.getFortune();
+    }
+
+    public PoloCoach(){
+        System.out.println("Polo coach - constructor");
+    }
+
+
 /*
     @Autowired
     @Qualifier("happyFortuneService")

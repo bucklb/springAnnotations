@@ -9,6 +9,17 @@ import org.springframework.stereotype.Component;
 //@Component()
 public class TennisCoach implements Coach{
 
+    private FortuneService fS;
+
+    // FortuneService via constructor
+    public TennisCoach(FortuneService theFortuneService){
+        System.out.println("Tennis coach - constructor");
+        fS=theFortuneService;
+    }
+    public String getDailyFortune() {
+        return fS.getFortune();
+    }
+
 /*
     private FortuneService fS;
 
@@ -18,9 +29,6 @@ public class TennisCoach implements Coach{
         fS=new SadFortuneService();
     }
 
-    public TennisCoach(FortuneService theFortuneService){
-        fS=theFortuneService;
-    }
 
     ////@Override
     public String getDailyFortune() {

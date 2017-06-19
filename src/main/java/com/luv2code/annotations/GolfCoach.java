@@ -23,6 +23,16 @@ public class GolfCoach implements Coach{
         System.out.println(">> golf INITed");
     }
 
+    private FortuneService fS;
+    public String getDailyFortune() {
+        return fS.getFortune();
+    }
+
+    public GolfCoach(){
+        System.out.println("Golf coach - constructor");
+    }
+
+
 /*
     @Autowired
     @Qualifier("happyFortuneService")
@@ -37,10 +47,6 @@ public class GolfCoach implements Coach{
         this.fS = fS;
     }
 
-    ////	@Override
-    public String getDailyFortune() {
-        return fS.getFortune();
-    }
 */
 
 /*
@@ -50,6 +56,9 @@ public class GolfCoach implements Coach{
 		fS=theFortuneService;
 	}
 */
+
+
+
 
     @Autowired
     public String getDailyWorkout() {
