@@ -1,7 +1,9 @@
 package com.luv2code.annotations;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 // -- Created project using : --
@@ -15,10 +17,18 @@ public class AnnotationApp {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        // 18/6/17 - assume this is where I was looking at mixing XML and AutoWire beans ??
+        AnnotationConfigApplicationContext autoctx = new AnnotationConfigApplicationContext(SportConfig.class);
 
-        // If the bean is in the context file then it gets initiated, even if it's never used
+        Coach swimCoach=autoctx.getBean("swimCoach",Coach.class);
+        System.out.println(swimCoach.getDailyWorkout());
+        System.out.println(swimCoach.getDailyFortune());
+        System.out.println("swimail = " +((SwimCoach)swimCoach).geteMail());
 
+/*
+        Coach theCoach = autoctx.getBean("poloCoach",Coach.class);
+        System.out.println(theCoach.getDailyWorkout());
+        System.out.println(theCoach.getDailyFortune());
+*/
         // via Autowire type stuff
 		Coach theCoach = context.getBean("poloCoach",Coach.class);
         System.out.println(theCoach.getDailyWorkout());
@@ -45,7 +55,6 @@ public class AnnotationApp {
         Coach passatCoach= context.getBean("passatCoach",Coach.class);
         System.out.println(passatCoach.getDailyWorkout());
         System.out.println(passatCoach.getDailyFortune());
-
 
 
         // Demonstrate getting stuff via the XML file (rather than autowire)
