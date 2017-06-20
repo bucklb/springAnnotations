@@ -1,14 +1,7 @@
 package com.luv2code.annotations;
 
-/*
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-*/
+// illustrate injection by constructor (XML)
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-
-//@Component()
 public class TennisCoach implements Coach{
 
     private FortuneService fS;

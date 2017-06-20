@@ -1,6 +1,9 @@
 package com.luv2code.annotations;
 
+// illustrate injection via constructor
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -34,6 +37,17 @@ public class PoloCoach implements Coach{
         System.out.println("Polo coach - constructor");
     }
 
+    // Specify that it's to grab a dependency that it can locate via bean "aHappySevice"
+    // @Qualifier is needed as there are multiple options for a fortuneService -
+    //   2 beans from XML (aHappy .. and aSad ...)
+    //   1 raw classes that has the @Component annotation (Happy ...)
+    // - looks like @Qualifier MUST LIVE IN the parameter list for constructor
+	@Autowired
+	public PoloCoach(@Qualifier("aSadFortuneService") FortuneService theFortuneService){
+		System.out.println("Constructing PoloCoach");
+		fS=theFortuneService;
+	}
+
 
 /*
     @Autowired
@@ -55,30 +69,9 @@ public class PoloCoach implements Coach{
     }
 */
 
-/*
-	@Autowired
-	public GolfCoach(FortuneService theFortuneService){
-		System.out.println("Constructing GolfCoach");
-		fS=theFortuneService;
-	}
-*/
 
-    @Autowired
     public String getDailyWorkout() {
-//		System.out.println("getting Daily workout");
-//        return "All in wrist " + email;
         return "Horse balls" ;
-    }
-
-
-    @Autowired
-    public void subsequentRndomThing(){
-        System.out.println("subsequent RANDOMNESS APLENTY - polo");
-    }
-
-    @Autowired
-    public void randomThing(){
-        System.out.println("RANDOMNESS APLENTY - polo");
     }
 
     // ?? autowired will fire things in run up to objetc creation ??

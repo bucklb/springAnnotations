@@ -23,22 +23,33 @@ public class AnnotationApp {
         System.out.println(theCoach.getDailyFortune());
 
         // Demonstrate getting stuff using the Autowire approach
-//        Coach theCoach = context.getBean("golfCoach",Coach.class);
-//        System.out.println(theCoach.getDailyWorkout());
+        Coach golfCoach = context.getBean("golfCoach",Coach.class);
+        System.out.println(golfCoach.getDailyWorkout());
+        System.out.println(golfCoach.getDailyFortune());
 
-//        Coach combiCoach= context.getBean("poloCoach",Coach.class);
-//        System.out.println(combiCoach.getDailyWorkout());
+        Coach passatCoach= context.getBean("passatCoach",Coach.class);
+        System.out.println(passatCoach.getDailyWorkout());
+        System.out.println(passatCoach.getDailyFortune());
 
 
-        String coachType = "snookerCoach";
 
         // Demonstrate getting stuff via the XML file (rather than autowire)
+        Coach xmlCoach;
+
+        Coach dupCoach = context.getBean("tennisCoach",Coach.class);
+        ((TennisCoach)dupCoach).setTeam("tennis coach other team");
+        System.out.println(((TennisCoach)dupCoach).getTeam());
+//        System.out.println(xmlCoach.getDailyWorkout());
+//        System.out.println(xmlCoach.getDailyFortune());
+
 //        Coach xmlCoach = context.getBean("tennisCoach",Coach.class);
-        Coach xmlCoach = context.getBean(coachType,Coach.class);
+        String coachType = "snookerCoach";
+        xmlCoach = context.getBean(coachType,Coach.class);
         System.out.println(xmlCoach.getDailyWorkout());
         System.out.println(xmlCoach.getDailyFortune());
 
         xmlCoach = context.getBean("tennisCoach",Coach.class);
+        System.out.println(((TennisCoach)dupCoach).getTeam()); // should retain the team we gave it
         System.out.println(((TennisCoach)xmlCoach).getTeam());
         System.out.println(xmlCoach.getDailyWorkout());
         System.out.println(xmlCoach.getDailyFortune());

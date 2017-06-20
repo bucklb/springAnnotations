@@ -1,5 +1,7 @@
 package com.luv2code.annotations;
 
+// illustrate injecting via setter
+
         import javax.annotation.PostConstruct;
         import javax.annotation.PreDestroy;
 
@@ -8,6 +10,8 @@ package com.luv2code.annotations;
         import org.springframework.beans.factory.annotation.Value;
         import org.springframework.stereotype.Component;
 
+// @Component specifies that we want to use this as a bean.
+// If we don't specify the bean/component name then it uses the lower case version of the class (MyClass->myClass)
 @Component
 public class GolfCoach implements Coach{
 
@@ -23,7 +27,26 @@ public class GolfCoach implements Coach{
         System.out.println(">> golf INITed");
     }
 
+
     private FortuneService fS;
+
+    public GolfCoach(FortuneService theFortuneService){
+        System.out.println("Constructing GolfCoach");
+        fS=theFortuneService;
+    }
+
+    // Specify that it's to grab a dependency that it can locate via bean "aHappySevice"
+    // @Qualifier is needed as there are multiple options for a fortuneService -
+    //   2 beans from XML (aHappy .. and aSad ...)
+    //   1 raw classes that has the @Component annotation (Happy ...)
+    // - looks like @Qualifier can live outside the parametr list for setter
+    @Autowired
+    public void setfS(@Qualifier("happyFortuneService") FortuneService fS) {
+        System.out.println("Setting GolfCoach fS");
+        this.fS = fS;
+    }
+
+
     public String getDailyFortune() {
         if (fS != null){
             return fS.getFortune();
@@ -37,11 +60,9 @@ public class GolfCoach implements Coach{
     }
 
 
-/*
-    @Autowired
-    @Qualifier("happyFortuneService")
-    private FortuneService fS;
 
+
+/*
 //	@Autowired
 //	private String s;
 
@@ -53,39 +74,15 @@ public class GolfCoach implements Coach{
 
 */
 
-/*
-	@Autowired
-	public GolfCoach(FortuneService theFortuneService){
-		System.out.println("Constructing GolfCoach");
-		fS=theFortuneService;
-	}
-*/
 
 
-
-
-    @Autowired
     public String getDailyWorkout() {
-//		System.out.println("getting Daily workout");
-//        return "All in wrist " + email;
         return "Swing at those balls " ;
-    }
-
-
-    @Autowired
-    public void subsequentRndomThing(){
-        System.out.println("subsequent RANDOMNESS APLENTY");
     }
 
     @Autowired
     public void randomThing(){
         System.out.println("RANDOMNESS APLENTY");
-    }
-
-    // ?? autowired will fire things in run up to objetc creation ??
-    @Autowired
-    public void anotherRandomThing(){
-        System.out.println("Even More RANDOMNESS APLENTY");
     }
 
 }
