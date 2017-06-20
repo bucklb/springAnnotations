@@ -8,15 +8,17 @@ package com.luv2code.annotations;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.beans.factory.annotation.Qualifier;
         import org.springframework.beans.factory.annotation.Value;
+        import org.springframework.context.annotation.Scope;
         import org.springframework.stereotype.Component;
 
 // @Component specifies that we want to use this as a bean.
 // If we don't specify the bean/component name then it uses the lower case version of the class (MyClass->myClass)
 @Component
+@Scope("prototype")
 public class GolfCoach implements Coach{
 
-//    @Value("${aa.email}")
-//    private String email;
+    @Value("${aa.email}")
+    private String email;
 
     @PreDestroy
     public void doKill(){

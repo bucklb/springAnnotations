@@ -1,5 +1,7 @@
 package com.luv2code.annotations;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 // -- Created project using : --
@@ -23,9 +25,22 @@ public class AnnotationApp {
         System.out.println(theCoach.getDailyFortune());
 
         // Demonstrate getting stuff using the Autowire approach
+        System.out.println("-------------- Prototype via annotation ------------------------");
+        GolfCoach caddyCoach = context.getBean("golfCoach",GolfCoach.class);
+        System.out.println(caddyCoach.getDailyWorkout());
+        System.out.println(caddyCoach.getDailyFortune());
+
+        caddyCoach.setfS(new SadFortuneService());
+
         Coach golfCoach = context.getBean("golfCoach",Coach.class);
+
         System.out.println(golfCoach.getDailyWorkout());
         System.out.println(golfCoach.getDailyFortune());
+
+        System.out.println(caddyCoach.getDailyWorkout());
+        System.out.println(caddyCoach.getDailyFortune());
+
+
 
         Coach passatCoach= context.getBean("passatCoach",Coach.class);
         System.out.println(passatCoach.getDailyWorkout());

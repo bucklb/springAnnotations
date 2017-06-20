@@ -7,18 +7,41 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-
-    <bean id="poloCoach"
-          class="com.luv2code.annotations.PoloCoach" >
+    <!-- Injectable dependency -->
+    <bean    id="aHappyFortuneService"
+          class="com.luv2code.annotations.HappyFortuneService">
     </bean>
 
+    <bean    id="aSadFortuneService"
+          class="com.luv2code.annotations.SadFortuneService">
+    </bean>
+
+
+    <context:property-placeholder location="classpath:sport.properties"/>
+
+    <!-- Snooker coach gets via constructor injection -->
     <bean id="snookerCoach"
-          class="com.luv2code.annotations.SnookerCoach" >
+          class="com.luv2code.annotations.SnookerCoach"
+          init-method="initSnooker"
+          destroy-method="destroySnooker">
+        <property name="fs" ref="aSadFortuneService"/>
     </bean>
 
+    <!-- Tennis coach gets via SETTER injection -->
     <bean id="tennisCoach"
+          class="com.luv2code.annotations.TennisCoach"
+          scope="prototype">
+                <constructor-arg ref="aHappyFortuneService"/>
+                <property name="team" value="${cc.team}"/>
+    </bean>
+
+
+
+
+    <!-- Here to illustrate that this bean goes through the motions, even though it's never called/used in code -->
+    <bean id="nonesuch"
           class="com.luv2code.annotations.TennisCoach" >
+        <constructor-arg ref="aSadFortuneService"/>
     </bean>
 
     <bean id="genericCoach"
